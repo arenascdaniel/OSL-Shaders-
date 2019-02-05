@@ -1,0 +1,76 @@
+///#include "stdosl.h"
+/////define remap function
+shader NormalCorrect 
+
+[[string maya_typeID = "0x04056"]]
+
+(
+///define inputs//
+
+int CSpace = 0 [[string widget = "popup", string options = "Raw|Srgb|rec709"]],
+
+point nMap = 0,
+
+float UVR = 0,
+
+///define output
+
+output point pOut = 0,
+
+
+	)
+
+{
+	///correcting color space before calculations
+
+	color Raw = nMap;
+
+	color Srgb = pow(nMap, 1/2.2);
+
+	color rec709 = pow(nMap, 1/1.95);
+
+	color modes[3] = {
+						Raw,//pos[0]
+						Srgb,//pos[1]
+						rec709//pos[2]
+					 };
+
+	color mOut = modes [CSpace]; //geting position from input
+	
+	////defining variables
+
+	float rds = -radians(UVR);
+
+	float X = mOut[0];
+
+	float Y = mOut[1];
+
+	float Z = mOut[2];
+
+	///converting normalized vectors to absolute space
+
+	float Xrem = (X/1) * 2 - 1 ;
+
+
+	float Yrem = (Y/1) * 2 - 1 ;
+
+	///rotating 2d vectors X/Y
+
+	float Xrot = Xrem*cos(rds)-Yrem*sin(rds);
+
+	float Yrot = Xrem*sin(rds)+Yrem*cos(rds);
+
+	////returning vectors to tangent map encoded
+
+	float XRnor = (Xrot/2) * 1 + 0.5 ;
+	float YRnor = (Yrot/2) * 1 + 0.5 ;
+
+	///combining in map
+
+	point Nrot = point (XRnor,YRnor,Z);
+
+
+
+	pOut = Nrot;
+
+}
