@@ -1,5 +1,9 @@
 ///#include "stdosl.h"
 /////define remap function
+//////////////////////////////////////////////////////////////////////////////////////
+/////This shader uses the rotation imput to correct the normal vector in rotated 
+/////tiled textures
+//////////////////////////////////////////////////////////////////////////////////////
 shader NormalCorrect 
 
 [[string maya_typeID = "0x04056"]]
@@ -60,12 +64,12 @@ output point pOut = 0,
 
 	float Yrot = Xrem*sin(rds)+Yrem*cos(rds);
 
-	////returning vectors to tangent map encoded
+	////returning vectors to tangent map space
 
 	float XRnor = (Xrot/2) * 1 + 0.5 ;
 	float YRnor = (Yrot/2) * 1 + 0.5 ;
 
-	///combining in map
+	///combining in one vector map
 
 	point Nrot = point (XRnor,YRnor,Z);
 
