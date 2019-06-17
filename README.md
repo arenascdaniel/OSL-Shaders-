@@ -23,7 +23,7 @@ Roadmap
     Simple two specular shader with tags for LPEs
     
     
-  Fuictions
+  Functions
   
     Fuctions that can be used along OSL code
 
