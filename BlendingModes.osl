@@ -1,0 +1,121 @@
+///#include "stdosl.h"
+//////////////////////////////////////////////////////////////////////////////////////
+/////This shader uses the rotation imput to correct the normal vector in rotated 
+/////tiled textures
+//////////////////////////////////////////////////////////////////////////////////////
+shader BlendingModes
+
+[[string maya_typeID = "0x04050"]]
+
+(
+///define inputs//
+
+int type = 0 [[ string widget = "popup", string options = over|multiply|screen|overlay|hardlight|softlight|colordodge|colorburn|add|sub|average|divide|difference|darken|lihgten|hue|sat|value]],
+
+color CinA = 0.5,
+
+color CinB = 0.5,
+
+color factor = 1,
+
+int clampLdr = 0 [[string widget = "boolean"]],
+
+///definr output
+
+output color Cout = 0,
+
+)
+
+{
+
+///adding fusion modes
+///over
+color over = CinB;
+
+///Multiply
+color colorMultiply = CinA * CinB;
+
+///Screen
+Color colorScreen = 1-((1-CinA)*(1-CinB));
+
+///Overlay
+float overlayR = 0;
+float overlayG = 0;
+float overlayB = 0;
+
+	///redeOverlay
+		if (CinA[0]<0.5)
+		{
+			overlayR=2 * CinA[0] * CinB[0];
+		}
+		else
+        {
+        	overlayR=1 - 2*(1-CinA[0]) * (1-CinB[0]);
+        }
+
+    ///greenOverlay
+    	if (CinA[1]<0.5)
+		{
+			overlayG= 2 * CinA[1] * CinB[1];
+		}
+		else
+        {
+        	overlayG= 1- 2*(1-CinA[1]) * (1-CinB[1]);
+        }
+
+    ///BlueOverlay
+    	if (CinA[2]<0.5)
+		{
+			overlayB= 2 * CinA[2] * CinB[2];
+		}
+		else
+        {
+        	overlayB= 1 - 2*(1-CinA[2]) * (1-CinB[2]);
+        }
+
+color overlayColor = color ("rgb", overlayR ,overlayG , overlayB);
+
+///hardlight
+color hardlight = 0;
+float hardlightR = 0;
+float hardlightG = 0;
+float hardlightB = 0;
+
+	//RedHardlight
+
+	if (CinA[0]<0.5)
+		{
+			hardlightR = CinA[0] * CinB[0];
+		}
+	else
+		{
+			hardlightR = 1 - ( (1-CinA[0]) * (1-CinB[0]) );
+		}
+
+	//GreenHardlight
+	if (CinA[1]<0.5)
+		{
+			hardlightG = CinA[1] * CinB[1];
+		}
+	else
+		{
+			hardlightG = 1 - ( (1-CinA[1]) * (1-CinB[1]) );
+		}
+
+	//BlueHardlight
+	if (CinA[2]<0.5)
+		{
+			hardlightB = CinA[2] * CinB[2];
+		}
+	else
+		{
+			hardlightB = 1 - ( (1-CinA[2]) * (1-CinB[2]) );
+		}
+
+hardlight = color("rgb",hardlightR,hardlightG,hardlightB);
+
+
+
+
+
+}
