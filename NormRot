@@ -1,5 +1,4 @@
 ///#include "stdosl.h"
-/////define remap function
 //////////////////////////////////////////////////////////////////////////////////////
 /////This shader uses the rotation imput to correct the normal vector in rotated 
 /////tiled textures
@@ -22,7 +21,7 @@ float UVR = 0,
 output point pOut = 0,
 
 
-	)
+)
 
 {
 	///correcting color space before calculations

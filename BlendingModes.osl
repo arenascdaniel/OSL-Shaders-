@@ -36,7 +36,7 @@ color over = CinB;
 color colorMultiply = CinA * CinB;
 
 ///Screen
-Color colorScreen = 1-((1-CinA)*(1-CinB));
+color colorScreen = 1-((1-CinA)*(1-CinB));
 
 ///Overlay
 float overlayR = 0;
@@ -114,8 +114,98 @@ float hardlightB = 0;
 
 hardlight = color("rgb",hardlightR,hardlightG,hardlightB);
 
+///soflihgt
+
+color softlight = ((1-(2*CinB))*CinA*CinA)+(2*CinB*CinA);
+
+///colorDodge
+
+color colorDodge = (CinA/(1-CinB));
+
+///colorBurn
+
+color colorBurn = 1-((1-CinA/CinB));
+
+///add
+
+color Addition = CinA+CinB;
+
+///sub
+
+ color Subtraction = CinA-CinB;
+
+///difference
+
+color difference = abs(CinA-CinB);
+
+///average
+
+color average = (CinA + CinB)*0.5;
+
+///divide 
+
+color divide = CinA/CinB;
+
+///darken
+
+color darken = min (CinA, CinB);
+
+///lighten
+
+color lighten = max(CinA, CinB);
+
+///hue
+
+color CinAHSV = transformc ("rgb","hsv", CinA);
+
+color CinBHSV = transformc ("rgb","hsv", CinB);
+
+color hue = color ("hsv", CinBHSV[0], CinAHSV[1], CinAHSV[2]);
+
+///sat
+
+color sat = color ("hsv", CinAHSV[0], CinBHSV[1], CinAHSV[2]);
+
+///value
+
+color value = color ("hsv", CinBHSV[0], CinAHSV[1], CinAHSV[2]);
 
 
+///Adding list to select 
 
+color mode [18]={	over,
+					colorMultiply,
+					colorScreen,
+					overlayColor,
+					hardlight,
+					softlight,
+					colorDodge,
+					colorBurn,
+					Addition,
+					Subtraction,
+					average,
+					divide,
+					difference,
+					darken,
+					lighten,
+					hue,
+					sat,
+					value
+				};
+
+color mixedcolor = mix(CinA, (mode[type]), factor );
+
+color lastcolor = 1;
+
+///preclamping values
+
+int clampInt=clampLdr;
+
+if ( clampInt = 1)
+	{lastcolor = clamp (mixedcolor, 0, 1);}
+else
+	{lastcolor = mixedcolor;}
+
+Cout = lastcolor;
 
 }
