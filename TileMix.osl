@@ -1,0 +1,71 @@
+///#include "stdosl.h"
+//////////////////////////////////////////////////////////////////////////////////////
+/////This node allows you to create the illusion of endles tiled texture with patterns, 
+/////mixing similar textures 
+//////////////////////////////////////////////////////////////////////////////////////
+shader TileMix
+
+[[string maya_typeID = "0x04057"]]
+
+(
+///define inputs
+
+int txAmount = 0 [[string widget = "popup", string options = "2|3|4|5|6|7|8"]],
+
+int randomnes = 0,
+
+int seed = 1,
+
+///texture inputs
+
+string 	txA =""[[string widget = "filename"]],
+color 	cA  = 1,
+string 	txB =""[[string widget = "filename"]],
+color 	cB  = 1,
+string 	txC =""[[string widget = "filename"]],
+color 	cC  = 1,
+string 	txD =""[[string widget = "filename"]],
+color 	cD  = 1,
+string 	txE =""[[string widget = "filename"]],
+color 	cE  = 1,
+string 	txF =""[[string widget = "filename"]],
+color 	cF  = 1,
+string 	txG =""[[string widget = "filename"]],
+color 	cG  = 1,
+string 	txH =""[[string widget = "filename"]],
+color 	cH  = 1,
+
+///Seam texture
+float seamWidth = 0,
+
+float seamSmoth = 0,
+
+string txSeam = ""[[string widget = "filename"]],
+
+///Uv properties
+string uvset = "map1",
+
+float Urepeat = 1,
+float Vrepeat = 1,
+
+float Uoffset = 0,
+float Voffset = 0,
+
+float UVrtate = 0 [[int slider = 1]],
+
+///CC properties
+
+float Hue = 0,
+float Sat = 1,
+float Val = 1,
+
+///define output
+output color Cout = 0,
+
+)
+
+{
+
+
+
+}
