@@ -3,7 +3,7 @@
 /////This utility has easy controls to manag edisplacement maps midpoint intensity and 
 /////offset
 //////////////////////////////////////////////////////////////////////////////////////
-shader DispUt
+shader daDisplacement
 
 [[string maya_typeID = "0x04051"]]
 
