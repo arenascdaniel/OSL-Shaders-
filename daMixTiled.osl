@@ -3,7 +3,7 @@
 /////This node allows you to create the illusion of endles tiled texture with patterns, 
 /////mixing similar textures 
 //////////////////////////////////////////////////////////////////////////////////////
-shader TileMix
+shader daMixTiled
 
 [[string maya_typeID = "0x04057"]]
 
