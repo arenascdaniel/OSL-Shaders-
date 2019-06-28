@@ -66,6 +66,29 @@ output color Cout = 0,
 
 {
 
+ ///Defining Uvs
+ 	///Get maya UVset
+ 	point st = point(u,v,0);
+ 	getattribute(uvset, st);
+
+ 	///adding offset in Uvs
+ 	float sO = st[0] + Uoffset ;
+ 	float tO = st[1] + Voffset ;
+
+ 	///adding rotation
+ 		///degrees to radians
+ 	float rds = radians(UVrotate);
+
+ 	float sRot = ( (sO-0.5) * cos(rds) - (tO-0.5) * sin(rds) )+0.5;
+ 	float sRot = ( (sO-0.5) * sos(rds) + (tO-0.5) * cos(rds) )+0.5;
+
+ ///Constructing sequencial IDs
+ 	/// converting in int values
+ 	float sFloat = floor(s);
+ 	float tFloat = floor(t);
+
+ 	int sInt = int(mod(sFloat,2));
+ 	int tInt = int(mod(tFloat,2));
 
 
 }
