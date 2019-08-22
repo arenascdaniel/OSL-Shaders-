@@ -89,17 +89,21 @@ output color Cout = 0,
  	float sScale = sRot*Urepeat;
  	float tScale = tRot*Vrepeat;
 
- ///Constructing sequencial IDs
+ ///Constructing sequencial IDs and adding random from cellnoise
  	/// converting in int values
  	float sFloat = floor(sScale);
  	float tFloat = floor(tScale);
 
- 	float celNoise = noise("cell", )
+ 	float rand = cellnoise(sScale,tScale)*randomnes;
 
 
- 	int cellID = int(mod((tFloat+sFloat),txAmount));
+ 	int cellID = int(mod((tFloat+sFloat+rand),txAmount));
 
- Cout = tInt;
+ 	color colCell[8] = {cA, cB, cC, cD, cE, cF, cG, cH };
+
+
+
+ Cout = colCell[cellID];
 
 
 }
