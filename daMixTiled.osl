@@ -3,14 +3,14 @@
 /////This node allows you to create the illusion of endles tiled texture with patterns, 
 /////mixing similar textures 
 //////////////////////////////////////////////////////////////////////////////////////
-shader daMixTiled
+shader daMixTiles
 
 [[string maya_typeID = "0x04057"]]
 
 (
 ///define inputs
 
-int txAmount = 0 [[string widget = "popup", string options = "2|3|4|5|6|7|8"]],
+int txAmount = 4 [[string widget = "popup", string options = "2|3|4|5|6|7|8"]],
 
 int randomnes = 0,
 
@@ -45,13 +45,15 @@ string txSeam = ""[[string widget = "filename"]],
 ///Uv properties
 string uvset = "map1",
 
-float Urepeat = 1,
-float Vrepeat = 1,
+float Urepeat = 10,
+float Vrepeat = 10
+
+,
 
 float Uoffset = 0,
 float Voffset = 0,
 
-float UVrtate = 0 [[int slider = 1]],
+float UVrotate = 0 [[int slider = 1]],
 
 ///CC properties
 
@@ -69,7 +71,7 @@ output color Cout = 0,
  ///Defining Uvs
  	///Get maya UVset
  	point st = point(u,v,0);
- 	getattribute(uvset, st);
+ 	getattribute("map1", st);
 
  	///adding offset in Uvs
  	float sO = st[0] + Uoffset ;
@@ -80,15 +82,24 @@ output color Cout = 0,
  	float rds = radians(UVrotate);
 
  	float sRot = ( (sO-0.5) * cos(rds) - (tO-0.5) * sin(rds) )+0.5;
- 	float sRot = ( (sO-0.5) * sos(rds) + (tO-0.5) * cos(rds) )+0.5;
+ 	float tRot = ( (sO-0.5) * sin(rds) + (tO-0.5) * cos(rds) )+0.5;
+
+ 	///adding scale
+
+ 	float sScale = sRot*Urepeat;
+ 	float tScale = tRot*Vrepeat;
 
  ///Constructing sequencial IDs
  	/// converting in int values
- 	float sFloat = floor(s);
- 	float tFloat = floor(t);
+ 	float sFloat = floor(sScale);
+ 	float tFloat = floor(tScale);
 
- 	int sInt = int(mod(sFloat,2));
- 	int tInt = int(mod(tFloat,2));
+ 	float celNoise = noise("cell", )
+
+
+ 	int cellID = int(mod((tFloat+sFloat),txAmount));
+
+ Cout = tInt;
 
 
 }
