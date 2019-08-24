@@ -44,11 +44,10 @@ string txSeam = ""[[string widget = "filename"]],
 
 ///Uv properties
 string uvset = "map1",
+int mipMapBias = 0,
 
 float Urepeat = 10,
-float Vrepeat = 10
-
-,
+float Vrepeat = 10,
 
 float Uoffset = 0,
 float Voffset = 0,
@@ -69,9 +68,10 @@ output color Cout = 0,
 {
 
  ///Defining Uvs
- 	///Get maya UVset
+ 	///Get maya UVset and bias
  	point st = point(u,v,0);
  	getattribute("map1", st);
+ 	int bias = int((-mipMapBias)+ min(Urepeat,Vrepeat));
 
  	///adding offset in Uvs
  	float sO = st[0] + Uoffset ;
@@ -99,7 +99,15 @@ output color Cout = 0,
 
  	int cellID = int(mod((tFloat+sFloat+rand),txAmount));
 
+ 	///Creating texture and color lists
+
  	color colCell[8] = {cA, cB, cC, cD, cE, cF, cG, cH };
+
+ 	string texCell[8] = {txA, txB, txC, txD, txE, txF, txG, txH};
+
+ 	///texture fuction 
+
+ 	color texCol = (texture(texCell[cellID], sScale, tScale, Dx(u)*bias, Dx(v)*bias, Dy(u)*bias, Dy(v)*bias, "wrap", "periodic"))*colCell[cellID];
 
 
 
