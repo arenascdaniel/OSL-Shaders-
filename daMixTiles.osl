@@ -109,9 +109,29 @@ output color Cout = 0,
 
  	color texCol = (texture(texCell[cellID], sScale, tScale, Dx(u)*bias, Dx(v)*bias, Dy(u)*bias, Dy(v)*bias, "wrap", "periodic"))*colCell[cellID];
 
+ 	color texSeam= (txSeam, sScale, tScale, Dx(u)*bias, Dx(v)*bias, Dy(u)*bias, Dy(v)*bias, "wrap", "periodic");
 
+ 	///Edge Mask
+ 	float invSeam = 1-seamWidth;
 
- Cout = colCell[cellID];
+ 	float smPercent = seamSmoth*invSeam;
+ 	
+ 	float edgeMask = 0;
+
+ 	if (seamWidth>0)
+ 		{
+
+ 		edgeMask = smoothstep(invSeam-smPercent, invSeam, max( (abs (cos (sScale*M_PI))),(abs (cos (tScale*M_PI) ))));
+
+		}
+	else
+		{
+		edgeMask = 0;
+		}
+
+	color outPatern = mix(texCol, texSeam, edgeMask);
+
+ Cout = outPatern;
 
 
 }
