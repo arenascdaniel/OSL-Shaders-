@@ -7,7 +7,7 @@ Roadmap
   
     WIP NormRot.- correct tangent space normal vector in rotated textures in Uv space.
 
-    DispUt.- easy management of displacement textures
+    DispTool.- easy management of displacement textures
 
     MixDisp.- mix textures by displacement
 
@@ -15,7 +15,7 @@ Roadmap
 
     TxTileMix.- this node is mixing ramdomly textures in a grid pattern. Use for avoiding visual repetitions on large tiled textures as brick walls.
 
-    TxBombing.- (or auto tile,) this node rotating scaling and traslating a texture in a cell pattern to make the illusion of seamless texture
+    TxBombing.- (or auto tile,) this node rotating scaling and traslating and seamlesly mixing a texture in a cell pattern to make the illusion of seamless texture
 
 
   Shaders
