@@ -50,7 +50,7 @@ output point pOut = 0,
 
 	float Z = mOut[2];
 
-	///converting normalized vectors to absolute space
+	///converting Vectors from 0.5 to 0.0
 
 	float Xrem = (X/1) * 2 - 1 ;
 
