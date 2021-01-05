@@ -44,11 +44,11 @@ output point pOut = 0,
 
 	float rds = -radians(UVR);
 
-	float X = mOut[0];
+	float X = nMap[0];
 
-	float Y = mOut[1];
+	float Y = nMap[1];
 
-	float Z = mOut[2];
+	float Z = nMap[2];
 
 	///converting Vectors from 0.5 to 0.0
 
