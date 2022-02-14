@@ -3,7 +3,7 @@
 /////This shader uses the rotation imput to correct the normal vector in rotated 
 /////tiled textures
 //////////////////////////////////////////////////////////////////////////////////////
-shader daMix
+shader acMix
 
 [[string maya_typeID = "0x04050"]]
 
