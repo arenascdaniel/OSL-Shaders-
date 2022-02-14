@@ -1,0 +1,60 @@
+shader acDisplacementMix 
+
+(
+int mode = 0,
+int mixType = 0,
+
+
+//// layer A parameters
+float inA = 0.5,
+float offsetA = -0.5,
+float multA = 1,
+
+
+///Layer B parameters
+float inB = 0.5,
+float offsetB = -0.5,
+float multB = 1,
+
+///mask
+float mask = 0,
+
+output float fOut = 0,
+)
+
+{
+
+///Simple variable names
+float A = (inA + offsetA) * multA;
+float B = (inB + offsetB) * multB;
+
+////add type
+float mixAdd = (A) + (B);
+
+////high type
+float mixHigh = max(A,B);
+
+////mask type
+float mixMask = mix(A,B,mask);
+
+////mask/high type
+float mixHighMask = mix (A, mixHigh, mask);
+
+float mixArray[4] = { 
+                    mixAdd,
+                    mixHigh, 
+                    mixMask, 
+                    mixHighMask 
+                    };
+
+//Select mixType and setup mode array
+float modeArray[2]= {
+                    mixArray[mixType], 
+                    mixArray[mixType]+0.5
+                    };                 
+                    
+
+///Select mode output 
+fOut = modeArray[mode];
+
+}
